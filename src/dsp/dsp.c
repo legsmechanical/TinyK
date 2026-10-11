@@ -3653,6 +3653,10 @@ static void* v2_create_instance(const char *module_dir, const char *json_default
     if (!inst) return NULL;
     synth_engine_t *synth = &inst->synth;
     synth_init(synth);
+    /* A new instance starts on a bank file when the banks/ folder holds one (the first in alphabetical order), and on
+     * the built-in bank only when it holds none. A slot restored from its saved state takes the bank that state
+     * names (apply_state below), the built-in one included. */
+    if (g_syx_bank_count > 0) select_bank_file(synth, 1);
     if (json_defaults) {
         const char *vm = strstr(json_defaults, "\"voice_mode\"");
         if (vm) {

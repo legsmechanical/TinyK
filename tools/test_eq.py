@@ -167,6 +167,15 @@ def test_host(lib_path, tmp):
     def eq():
         return [get(k) for k in ("eq_low_freq", "eq_low_gain", "eq_hi_freq", "eq_hi_gain")]
 
+    # a new instance starts on the bank file when there is one (the test bank, scanned in test_decoders)
+    check(get("bank_file") == "1" and get("bank_file_name") not in (None, "Built-in"),
+          "a new instance starts on the bank file, not the built-in bank: %s (%s)" % (get("bank_file"), get("bank_file_name")))
+    put("bank_file", "0")
+    check(get("bank_file_name") == "Built-in", "the built-in bank can still be chosen")
+    on_built_in = get("state")
+    put("bank_file", "1")
+    put("state", on_built_in)
+    check(get("bank_file") == "0", "a state saved on the built-in bank restores the built-in bank")
     check(eq() == ["0", "0", "0", "0"], "a built-in program loads a flat EQ: %s" % eq())
     put("bank_file", "1")
     put("preset", "40")   # program 40 of the test bank: Hi 10 / +3 dB, Low (40 * 7) % 30 = 10 / (440 % 25) - 12 = +3 dB

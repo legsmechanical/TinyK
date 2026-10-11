@@ -158,6 +158,7 @@ def vocoder_banks():
             return {e["key"]: e for e in json.loads(get("chain_params"))}
 
         check(lib.tinyk_v2_create(module_dir.encode()) == 1, "instance created")
+        put("bank_file", "0")   # a new instance starts on the first bank file; these checks are written from the built-in bank
         check(voc == row8 and len(voc) == 16, f"TinyK_Default.syx flags exactly the 16 row-8 programs as vocoder: {voc}")
 
         # Built-in bank (presets.h): 112 programs, seven categories, the matrix without its vocoder row
@@ -291,6 +292,7 @@ def host_api():
             lib.tinyk_v2_set(key.encode(), str(val).encode())
 
         check(lib.tinyk_v2_create(module_dir.encode()) == 1, "instance created")
+        put("bank_file", "0")   # a new instance starts on the first bank file; these checks are written from the built-in bank
         try:
             cp = json.loads(get("chain_params"))
             meta = {e["key"]: e for e in cp}
@@ -650,6 +652,8 @@ def multi_instance():
 
         check(lib.tinyk_v2_create_n(0, module_dir.encode()) == 1 and lib.tinyk_v2_create_n(1, module_dir.encode()) == 1,
               "two instances created")
+        put(0, "bank_file", "0")   # both start on the first bank file; the checks below are written from the built-in bank
+        put(1, "bank_file", "0")
         keys = ("preset", "bank_file_name", "cutoff", "voice_mode", "timbre_edit", "modfx_type", "arp_on", "arp_step1")
         fresh = {k: get(1, k) for k in keys}
         state1 = get(1, "state")

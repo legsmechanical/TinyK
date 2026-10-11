@@ -307,7 +307,7 @@ Which bank of programs is loaded.
 
 | Enc | Label | Controls | Range / values | Tip |
 |-----|-------|----------|----------------|-----|
-| 1 | BANK | Bank | `Built-in` or any microKORG / MS2000 `.syx` bank found in the module's `banks/` folder when the slot started. | Changing bank keeps the current program number. |
+| 1 | BANK | Bank | `Built-in` or any microKORG / MS2000 `.syx` bank found in the module's `banks/` folder when the slot started. | A new slot starts on the first bank file (alphabetically) when the folder holds one, on `Built-in` otherwise; a saved Set keeps the bank it was saved with. Changing bank keeps the current program number. |
 | - | Browse banks | Bank list | A menu entry under the Bank knob, not an encoder. Select it on the Bank page and click the jog wheel to open the list; turn the jog wheel to highlight a bank and click to pick it. You return to the main page afterwards. | Turning the Bank knob (encoder 1) switches banks without opening the list. Put `.syx` files in `banks/` on the Move and reload the slot to see them. |
 
 ---

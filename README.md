@@ -13,7 +13,7 @@ A lightweight virtual analog synth engine in the style of the classic early-2000
 - **The 64 DWGS waveforms and the Vox wave,** sampled from the output of KORG's microKORG plug-in, with a DWGS picker on the Osc page.
 - **Genre category navigation:** pick a category, then scroll its 16 programs (A1–A8, B1–B8) on a single knob, with the patch name in the header.
 - **Dynamic SysEx bank loader (microKORG & MS2000 compatible):** drop standard microKORG or MS2000 128-program `.syx` bank dumps into the module's `banks/` folder and switch between them by name. Banks are decoded once at start-up, so switching never allocates memory or touches files while audio runs.
-- **Built-in factory bank:** 112 production-ready performance presets covering classic leads, pads, basses, and arpeggios, playable immediately without external files.
+- **Built-in factory bank:** 112 production-ready performance presets covering classic leads, pads, basses, and arpeggios, playable immediately without external files. With a `.syx` bank in the module's `banks/` folder, a new TinyK slot starts on that bank instead (the first one, alphabetically); the built-in bank stays on the Bank page.
 
 ## Requirements
 - An Ableton Move with Schwung installed and on your network (`move.local`).
